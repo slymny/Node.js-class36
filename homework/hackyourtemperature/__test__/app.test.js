@@ -18,7 +18,7 @@ describe('POST /weather', () => {
     });
 
     it('should specify json in the content type header', async () => {
-      const response = await request.post('/weather').send();
+      const response = await request.post('/weather').send(body);
       expect(response.headers['content-type']).toContain('json');
     });
   });
