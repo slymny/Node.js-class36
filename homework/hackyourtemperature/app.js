@@ -17,14 +17,18 @@ app.post('/weather', async (req, res) => {
 
   try {
     if (!cityName) {
-      res.status(400).json({weatherText: 'Please enter a valid city name'});
+      res.status(400).json({weatherText: 'Please provide a city name'});
       return;
     }
     const response = await fetch(apiURL);
     const dataJSON = await response.json();
-    res.status(200).json({cityName: dataJSON.name, temp: dataJSON.main.temp});
+    if (dataJSON.cod === '404') {
+      res.status(400).json({weatherText: dataJSON.message});
+      return;
+    }
+    res.status(200).json({weatherText: `${dataJSON.name} current temperature is 20 degrees`});
   } catch (err) {
-    res.status(404).json({weatherText: 'City is not found!'});
+    console.log(err);
   }
 });
 

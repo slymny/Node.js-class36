@@ -4,11 +4,6 @@ import supertest from 'supertest';
 const request = supertest(app);
 
 describe('POST /weather', () => {
-  describe('quick test', () => {
-    it('Quick test', () => {
-      expect(1).toBe(1);
-    });
-  });
   describe('given a cityname', () => {
     const body = {
       cityname: 'london',
